@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Department Management</title>
+
+   <style>
+
+      *{
+         margin:0;
+         padding:0;
+         box-sizing:border-box;
+         font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body{
+         background:linear-gradient(135deg,#6a11cb,#2575fc);
+         min-height:100vh;
+         padding:40px;
+      }
+
+      .container{
+         max-width:1000px;
+         margin:auto;
+         background:#fff;
+         padding:35px;
+         border-radius:15px;
+         box-shadow:0 10px 30px rgba(0,0,0,0.25);
+      }
+
+      h2{
+         text-align:center;
+         color:#2c3e50;
+         font-size:35px;
+         margin-bottom:25px;
+      }
+
+      .add-btn{
+         display:inline-block;
+         text-decoration:none;
+         background:#28a745;
+         color:white;
+         padding:12px 22px;
+         border-radius:8px;
+         font-size:16px;
+         font-weight:bold;
+         margin-bottom:25px;
+         transition:0.3s;
+      }
+
+      .add-btn:hover{
+         background:#218838;
+         transform:scale(1.05);
+      }
+
+      table{
+         width:100%;
+         border-collapse:collapse;
+         border-radius:10px;
+         overflow:hidden;
+      }
+
+      thead{
+         background:#2575fc;
+         color:white;
+      }
+
+      th,td{
+         padding:15px;
+         text-align:center;
+         border-bottom:1px solid #ddd;
+      }
+
+      tbody tr:nth-child(even){
+         background:#f5f7fa;
+      }
+
+      tbody tr:hover{
+         background:#d9ecff;
+         transition:0.3s;
+      }
+
+      .action-btn{
+         text-decoration:none;
+         color:white;
+         padding:8px 15px;
+         border-radius:6px;
+         font-size:14px;
+         font-weight:bold;
+      }
+
+      .update{
+         background:#ffc107;
+         color:black;
+      }
+
+      .update:hover{
+         background:#e0a800;
+      }
+
+      .delete{
+         background:#dc3545;
+      }
+
+      .delete:hover{
+         background:#b52a37;
+      }
+
+      @media(max-width:768px){
+
+         table{
+            display:block;
+            overflow-x:auto;
+            white-space:nowrap;
+         }
+
+         h2{
+            font-size:28px;
+         }
+
+      }
+
+   </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+   <h2>🏢 Department Management</h2>
+
+   <a href="/newdepartment" class="add-btn">
+      ➕ Add New Department
+   </a>
+
+   <table>
+
+      <thead>
+      <tr>
+         <th>ID</th>
+         <th>Department Name</th>
+         <th>Head of Department (HOD)</th>
+         <th>Update</th>
+         <th>Delete</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr th:each="department : ${listdepartments}">
+
+         <td th:text="${department.id}"></td>
+
+         <td th:text="${department.name}"></td>
+
+         <td th:text="${department.hod}"></td>
+
+         <td>
+            <a class="action-btn update"
+               th:href="@{/updatedepartment/{id}(id=${department.id})}">
+               Update
+            </a>
+         </td>
+
+         <td>
+            <a class="action-btn delete"
+               th:href="@{/deletedepartment/{id}(id=${department.id})}">
+               Delete
+            </a>
+         </td>
+
+      </tr>
+
+      </tbody>
+
+   </table>
+
+</div>
+
+</body>
+</html>

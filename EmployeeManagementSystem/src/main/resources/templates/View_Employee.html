@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#4facfe,#00c6fb);
+            min-height:100vh;
+            padding:40px;
+        }
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+            background:#fff;
+            padding:35px;
+            border-radius:15px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+            color:#2c3e50;
+            margin-bottom:25px;
+            font-size:35px;
+        }
+
+        .top-btn{
+            display:inline-block;
+            text-decoration:none;
+            background:#28a745;
+            color:#fff;
+            padding:12px 22px;
+            border-radius:8px;
+            font-size:16px;
+            font-weight:bold;
+            margin-bottom:25px;
+            transition:0.3s;
+        }
+
+        .top-btn:hover{
+            background:#218838;
+            transform:scale(1.05);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            overflow:hidden;
+            border-radius:10px;
+        }
+
+        thead{
+            background:#007bff;
+            color:white;
+        }
+
+        th,td{
+            padding:15px;
+            text-align:center;
+            border-bottom:1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even){
+            background:#f8f9fa;
+        }
+
+        tbody tr:hover{
+            background:#dbefff;
+            transition:0.3s;
+        }
+
+        .action-btn{
+            text-decoration:none;
+            color:white;
+            padding:8px 15px;
+            border-radius:5px;
+            font-size:14px;
+            font-weight:bold;
+        }
+
+        .update{
+            background:#ffc107;
+            color:#000;
+        }
+
+        .update:hover{
+            background:#e0a800;
+        }
+
+        .delete{
+            background:#dc3545;
+        }
+
+        .delete:hover{
+            background:#c82333;
+        }
+
+        .department{
+            font-weight:bold;
+            color:#007bff;
+        }
+
+        @media(max-width:768px){
+
+            table{
+                display:block;
+                overflow-x:auto;
+                white-space:nowrap;
+            }
+
+            h2{
+                font-size:28px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>👨‍💼 Employee Management System</h2>
+
+    <a href="/newemployee" class="top-btn">➕ Add New Employee</a>
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Employee Name</th>
+            <th>Address</th>
+            <th>Salary</th>
+            <th>Update</th>
+            <th>Delete</th>
+            <th>Department</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="employee : ${Employees}">
+
+            <td th:text="${employee.id}"></td>
+
+            <td th:text="${employee.name}"></td>
+
+            <td th:text="${employee.address}"></td>
+
+            <td th:text="${employee.salary}"></td>
+
+            <td>
+                <a class="action-btn update"
+                   th:href="@{/updateemployee/{id}(id=${employee.id})}">
+                    Update
+                </a>
+            </td>
+
+            <td>
+                <a class="action-btn delete"
+                   th:href="@{/deleteemployee/{id}(id=${employee.id})}">
+                    Delete
+                </a>
+            </td>
+
+            <td class="department"
+                th:text="${employee.department != null ? employee.department.name : 'No Department Assigned'}">
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
